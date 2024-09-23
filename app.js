@@ -1,4 +1,4 @@
-let userList = [];
+let userList = JSON.parse(localStorage.getItem("userList")) || [];
 let editIndex = null;
 var enterfname = document.getElementById("inputfname");
 var enterlname = document.getElementById("inputlname");
@@ -47,6 +47,7 @@ const handleSubmit = () => {
   // pushdata into array
 
   userList.push(newData);
+  localStorage.setItem("userList", JSON.stringify(userList));
   tableRender();
 
   // Clear the input fields
@@ -92,6 +93,8 @@ const handleDelete = (index) => {
   console.log(index);
 
   userList.splice(index, 1);
+  localStorage.setItem("userList", JSON.stringify(userList));
+
   tableRender();
 };
 
@@ -117,6 +120,9 @@ function handleUpdate() {
     phone: enterphone.value,
   };
   userList[editIndex] = obj; //
+
+  localStorage.setItem("userList", JSON.stringify(userList));
+
   enterfname.value = "";
   enterlname.value = "";
   enteremail.value = "";
